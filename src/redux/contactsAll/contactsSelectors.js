@@ -7,8 +7,8 @@ export const getIsLoadingSelector = state => state.phonebook.isLoading;
 export const getFilteredContacts = createSelector(
   [itemsSelector, filterSelector],
   (contacts, filter) => {
-    console.log(contacts);
-    console.log(filter);
+    // console.log(contacts);
+    // console.log(filter);
     const visibleContacts = contacts.filter(contact => {
       return contact.name.toLowerCase().includes(filter.toLowerCase());
     });
