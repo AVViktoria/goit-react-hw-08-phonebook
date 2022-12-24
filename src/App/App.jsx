@@ -1,6 +1,6 @@
 // import { Route, Routes } from 'react-router-dom';
 // import { useEffect, Suspense, lazy } from 'react';
-
+// import { useDispatch, useSelector } from 'react-redux';
 
 //*      Components      //
 import ContactList from 'components/ContactList';
@@ -13,6 +13,14 @@ import Section from 'components/Section/Section';
 import '../index.scss';
 
 // import { useEffect, Suspense, lazy } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+
+//*      Auth selectors      //
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {authOperations, authSelectors} from '../redux/auth'
+
+  // import { useEffect, Suspense, lazy } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { Switch } from 'react-router-dom';
 // import AppBar from './components/AppBar';
@@ -29,21 +37,39 @@ import '../index.scss';
 
 //*      Root      //
 export default function App() {
- 
+  const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsLoggedIn);
+  console.log(isFetchingCurrentUser);
+//  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
+  
+
+  useEffect(() => {
+    // dispatch(authOperations.fetchCurrentUser());
+    dispatch(authOperations({
+       "email": "test@teaty.com",
+  "password": "pas12345"
+    }))
+  }, [dispatch]);
   return (
-    <>
-      <Section>
-        <Container>
-          <h1 className="title">Phonebook</h1>
-          <ContactForm  />
-        </Container>
-        <Container>
-          <h2 className="title">Contacts</h2>
-          <Filter />
-          <ContactList
-          />
-        </Container>
-      </Section>
-    </>
+    <Container>
+      {/* {isFetchingCurrentUser ? (
+        <h1>Показываем React Skeleton</h1>
+      ) : ( */}
+        <>
+          <Section>
+            <Container>
+              <h1 className="title">Phonebook</h1>
+              <ContactForm />
+            </Container>
+            <Container>
+              <h2 className="title">Contacts</h2>
+              <Filter />
+              <ContactList
+              />
+            </Container>
+          </Section>
+      </>
+      {/* )} */}
+    </Container>
   );
 }
