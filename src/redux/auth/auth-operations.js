@@ -12,31 +12,25 @@ const token = {
   },
 };
 
-/*
-/*---------- REGISTER-------//
- * POST @ /users/signup
- * body: { name, email, password }
- * После успешной регистрации добавляем токен в HTTP-заголовок
- */
+
+//---------- REGISTER-------//
 const register = createAsyncThunk(
   'auth/register',
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('/users/signup', credentials);
       token.set(data.token);
+      console.log(data)
       return data;
     } catch (error) {
+      console.log('----data register error')
       return rejectWithValue(error.message);
     }
   }
 );
 
-/*
-/*---------- LOGIN-------//
- * POST @ /users/login
- * body: { email, password }
- * После успешного логина добавляем токен в HTTP-заголовок
- */
+
+//---------- LOGIN-------//
 const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, { rejectWithValue }) => {
@@ -45,17 +39,14 @@ const logIn = createAsyncThunk(
       token.set(data.token);
       return data;
     } catch (error) {
+      console.log('----data login error')
       return rejectWithValue(error.message);
     }
   }
 );
 
-/*
-/*---------- LOGOUT-------//
- * POST @ /users/logout
- * headers: Authorization: Bearer token
- * После успешного логаута, удаляем токен из HTTP-заголовка
- */
+
+//---------- LOGOUT-------//
 const logOut = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
@@ -63,21 +54,14 @@ const logOut = createAsyncThunk(
       await axios.post('/users/logout');
       token.unset();
     } catch (error) {
+      console.log('----data logout error')
       return rejectWithValue(error.message);
     }
   }
 );
 
-/*
-/*---------- REFRESH-------//
- * GET @ /users/current
- * headers:
- *    Authorization: Bearer token
- *
- * 1. Забираем токен из стейта через getState()
- * 2. Если токена нет, выходим не выполняя никаких операций
- * 3. Если токен есть, добавляет его в HTTP-заголовок и выполянем операцию
- */
+
+//---------- REFRESH-------//
 const fetchCurrentUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
@@ -85,7 +69,7 @@ const fetchCurrentUser = createAsyncThunk(
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {
-      console.log('Токена нет, уходим из fetchCurrentUser');
+      // console.log('Токена нет, уходим из fetchCurrentUser');
       return thunkAPI.rejectWithValue();
     }
 

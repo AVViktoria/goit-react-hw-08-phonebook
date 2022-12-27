@@ -31,15 +31,17 @@ const authPersistConfig = {
 const persistedContacts = persistReducer(authPersistConfig, contactsReducer);
 const persistAuth = persistReducer(authPersistConfig, authReducer);
 
-const rootReducer = combineReducers({
-  filter: filterReducer,
-  phonebook: persistedContacts,
-});
+// const rootReducer = combineReducers({
+//   filter: filterReducer,
+//   phonebook: persistedContacts,
+// });
 
 export const store = configureStore({
   reducer: {
     auth: persistAuth,
-    reducer: rootReducer,
+    filter: filterReducer,
+  phonebook: persistedContacts,
+    // reducer: rootReducer,
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({

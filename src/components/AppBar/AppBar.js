@@ -20,8 +20,8 @@ export default function AppBar() {
     <>
       <header style={styles.header}>
         <Navigation />
-
-        {isLoggedIn ? <UserMenu /> : <AuthNav />}
+        {isLoggedIn ? 
+        <UserMenu /> : <AuthNav />}
       </header>
       <Outlet />
     </>

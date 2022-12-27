@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
+// import { useNavigate } from 'react-router-dom';
 
 const styles = {
   form: {
@@ -15,6 +16,7 @@ const styles = {
 
 export default function RegisterView() {
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,7 +33,22 @@ export default function RegisterView() {
         return;
     }
   };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const { currentTarget: formRef } = event;
+  //   const { email, password, name } = formRef.elements;
 
+  //   const credentials = {
+  //     name: name.value,
+  //     email: email.value,
+  //     password: password.value,
+  //   };
+
+  //   dispatch(authOperations.register(credentials))
+  //     .unwrap()
+  //     .then(() => navigate('/', { replace: true }))
+  //     .catch((error) => {});
+  // };
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(authOperations.register({ name, email, password }));
@@ -65,6 +82,7 @@ export default function RegisterView() {
           <input
             type="password"
             name="password"
+            // pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,24}$"
             value={password}
             onChange={handleChange}
           />

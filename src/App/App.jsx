@@ -12,9 +12,9 @@ import '../index.scss';
 
 //*      Auth selectors      //
 import { useDispatch, useSelector } from 'react-redux';
-import {useEffect, Suspense, lazy } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 // import { Switch } from 'react-router-dom';
-import {authOperations, authSelectors} from '../redux/auth'
+import { authOperations, authSelectors } from '../redux/auth';
 
 //*      Lazy pages      //
 
@@ -30,8 +30,7 @@ export default function App() {
   const dispatch = useDispatch();
   // const isFetchingCurrentUser = useSelector(authSelectors.getIsLoggedIn);
   // console.log(isFetchingCurrentUser);
-   const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
-  
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
@@ -40,26 +39,38 @@ export default function App() {
     //   "password": "pas12345"
     // }))
   }, [dispatch]);
-  return(
-  isFetchingCurrentUser ? (
+  return isFetchingCurrentUser ? (
     <h1>Показываем React Skeleton</h1>
   ) : (
     <div>
-
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-          <Route path="/" element={<AppBar />}> 
-          <Route index element={<HomeView />} />
-          <Route path="/login" element={<LoginView />} redirectTo={'./contacts'} />
-          <Route path="/register" element={<RegisterView />} redirectTo={'./contacts'} />
-          <Route path="/contacts" element={<Phonebook />} redirectTo={'./login'} />
-          <Route path="/upload" element={<UploadView />}  redirectTo="/login" />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<AppBar />}>
+            <Route index element={<HomeView />} />
+            <Route
+              path="/login"
+              element={<LoginView />}
+              redirectTo='./contacts'
+            />
+            <Route
+              path="/register"
+              element={<RegisterView />}
+              redirectTo='./contacts'
+            />
+            <Route
+              path="/contacts"
+              element={<Phonebook />}
+              redirectTo='./login'
+            />
+            <Route
+              path="/upload"
+              element={<UploadView />}
+              redirectTo="/login"
+            />
           </Route>
           <Route path="*" element={<LoginView />} />
-         </Routes>
-         </Suspense> 
-      
+        </Routes>
+      </Suspense>
     </div>
-  )
   );
-};
+}
