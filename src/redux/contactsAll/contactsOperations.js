@@ -41,19 +41,34 @@ export const delAllContacts = createAsyncThunk(
     }
   }
 );
+// export const editContacts = createAsyncThunk(
+//   'contacts/editContact',
+
+//   async (contact, { rejectWithValue }) => {
+//     try {
+//       const response = await axios.put(`/contacts/${contact.id}`, contact);
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error);
+//     }
+//   }
+// );
 export const editContacts = createAsyncThunk(
-  'contacts/editContact',
-
-  async (contact, { rejectWithValue }) => {
-    try {
-      const response = await axios.put(`/contacts/${contact.id}`, contact);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error);
+  'contacts/editContacts',
+  async (contact, thunkAPI) => {
+    const { id, name, number } = contact;
+    const update = { name, number };
+    if (!update) {
+      return;
     }
-  }
+    try {
+      const action = await axios.patch(`/contacts/${id}`, update);
+      return action.data;
+    } catch ({ response }) {
+      return thunkAPI.rejectWithValue(response.status);
+    }
+  },
 );
-
 // export const getAllContacts = createAsyncThunk(
 //   'contacts/getAllContacts',
 //   async (_, { rejectWithValue }) => {
