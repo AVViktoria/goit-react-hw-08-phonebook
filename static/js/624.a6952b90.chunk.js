@@ -1,0 +1,1 @@
+(self.webpackChunkgoit_react_hw_08_phonebook=self.webpackChunkgoit_react_hw_08_phonebook||[]).push([[624],{6604:function(){},1624:function(n,e,o){"use strict";o.r(e),o.d(e,{default:function(){return u.a}});var t=o(6604),u=o.n(t)}}]);
