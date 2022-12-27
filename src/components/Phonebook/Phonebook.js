@@ -1,40 +1,41 @@
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import {authOperations} from '../../redux/auth';
+import { authSelectors, authOperations } from '../../redux/auth';
 
-
-// import {Section} from '../Section';
-// import { Container } from '../Container';
-// import {ContactForm} from '../ContactForm';
-// import {Filter} from '../Filter';
-// import {ContactList} from '../ContactList';
+import  Section  from '../Section';
+import  Container  from '../Container';
+import  ContactForm  from '../ContactForm';
+import  Filter  from '../Filter';
+import  ContactList  from '../ContactList';
 
 export default function Phonebook() {
-const dispatch = useDispatch();
-// const 
-useEffect (()=>{
-dispatch(dispatch(authOperations.fetchCurrentUser()))
-},[dispatch]);
+  const dispatch = useDispatch();
+  const allContacts = useSelector(authSelectors.getUsername);
+  const isLoading = useSelector(authSelectors.getIsLoggedIn);
+  const error = useSelector(authSelectors.getError);
 
-return(
+  useEffect(() => {
+    dispatch(dispatch(authOperations.fetchCurrentUser()));
+  }, [dispatch]);
 
-  <h1>Hello</h1>
-
-)
+  return (
+    <>
+      <Section>
+        <Container>
+          <h1 className="title">Phonebook</h1>
+          <ContactForm />
+        </Container>
+        {allContacts.length ? (
+          <Container>
+            <h2 className="title">Contacts</h2>
+            <Filter />
+            {isLoading && !error && <b>Request in progress...</b>}
+            <ContactList />
+          </Container>
+        ) : (
+          <h1 className="title">Phonebook</h1>
+        )}
+      </Section>
+    </>
+  );
 }
-
-
-
-
-//  <Section>
-//           <Container>
-//             <h1 className="title">Phonebook</h1>
-//             <ContactForm />
-//           </Container>
-//           <Container>
-//             <h2 className="title">Contacts</h2>
-//             <Filter />
-//             <ContactList
-//             />
-//           </Container>
-//         </Section>
