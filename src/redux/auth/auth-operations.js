@@ -12,7 +12,6 @@ const token = {
   },
 };
 
-
 //---------- REGISTER-------//
 const register = createAsyncThunk(
   'auth/register',
