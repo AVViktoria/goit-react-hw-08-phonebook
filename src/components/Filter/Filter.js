@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filterChanges } from 'redux/filter/filterSlice';
 import { filterSelector } from '../../redux/contactsAll/contactsSelectors';
 
-const Filter = () => {
+export default function Filter()  {
   const dispatch = useDispatch();
   const filter = useSelector(filterSelector);
 
@@ -37,4 +37,4 @@ Filter.prototype = {
   value: PropTypes.string.isRequired,
   onValueChanges: PropTypes.func.isRequired,
 };
-export default Filter;
+

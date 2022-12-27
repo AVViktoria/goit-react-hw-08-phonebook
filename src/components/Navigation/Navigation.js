@@ -16,31 +16,31 @@ const styles = {
   },
 };
 
-const Navigation = () => {
+export default function Navigation(){
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   return (
     <nav>
-      <NavLink to="/" exact style={styles.link} activeStyle={styles.activeLink}>
-        Главная
+      <NavLink to="/" style={styles.link}>
+        Home
       </NavLink>
 
       {isLoggedIn && (
         <>
           <NavLink
             to="/contacts"
-            exact
+           
             style={styles.link}
-            activeStyle={styles.activeLink}
+            
           >
-            Заметки
+            Phonebook
           </NavLink>
           <NavLink
             to="/upload"
-            exact
+           
             style={styles.link}
-            activeStyle={styles.activeLink}
+          
           >
-            Загрузить
+            Loading
           </NavLink>
         </>
       )}
@@ -48,7 +48,7 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+
 
 // import { useState } from 'react';
 // import { NavLink } from 'react-router-dom';

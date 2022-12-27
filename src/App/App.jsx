@@ -48,12 +48,13 @@ export default function App() {
 
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-          <Route path="/" element={<AppBar />}/> 
+          <Route path="/" element={<AppBar />}> 
           <Route index element={<HomeView />} />
           <Route path="/login" element={<LoginView />} redirectTo={'./contacts'} />
           <Route path="/register" element={<RegisterView />} redirectTo={'./contacts'} />
           <Route path="/contacts" element={<Phonebook />} redirectTo={'./login'} />
           <Route path="/upload" element={<UploadView />}  redirectTo="/login" />
+          </Route>
           <Route path="*" element={<LoginView />} />
          </Routes>
          </Suspense> 
