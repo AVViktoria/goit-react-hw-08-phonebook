@@ -29,6 +29,9 @@ export default function Navigation() {
           <NavLink to="/contacts" style={styles.link}>
             Phonebook
           </NavLink>
+          <NavLink to="/todos" style={styles.link}>
+            Notes
+          </NavLink>
           <NavLink to="/upload" style={styles.link}>
             Loading
           </NavLink>

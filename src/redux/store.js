@@ -2,7 +2,7 @@ import {  configureStore } from '@reduxjs/toolkit';
 import { contactsReducer } from './items/contactsSlice';
 import { filterReducer } from './filter/filterSlice';
 import { authReducer } from './auth';
-
+import { todosReducer } from './todos';
 import {
   persistStore,
   persistReducer,
@@ -40,6 +40,7 @@ export const store = configureStore({
     auth: persistAuth,
     filter: filterReducer,
   phonebook: persistedContacts,
+  todos: todosReducer,
     // reducer: rootReducer,
   },
   middleware(getDefaultMiddleware) {

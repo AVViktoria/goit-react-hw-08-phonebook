@@ -24,21 +24,17 @@ const HomeView = lazy(() => import('../views/HomeView'));
 const AppBar = lazy(() => import('../components/AppBar'));
 const Phonebook = lazy(() => import('../components/Phonebook'));
 const UploadView = lazy(() => import('../views/UploadView'));
+const TodosView = lazy(() => import('../views/TodosView'));
 
 //*      Root      //
 export default function App() {
   const dispatch = useDispatch();
-  // const isFetchingCurrentUser = useSelector(authSelectors.getIsLoggedIn);
-  // console.log(isFetchingCurrentUser);
   const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrent);
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
-    // dispatch(authOperations({
-    //   "email": "test@teaty.com",
-    //   "password": "pas12345"
-    // }))
   }, [dispatch]);
+
   return isFetchingCurrentUser ? (
     <h1>Показываем React Skeleton</h1>
   ) : (
@@ -61,6 +57,11 @@ export default function App() {
               path="/contacts"
               element={<Phonebook />}
               redirectTo='./login'
+            />
+            <Route
+              path="/todos"
+              element={<TodosView/>}
+              redirectTo="/login"
             />
             <Route
               path="/upload"
