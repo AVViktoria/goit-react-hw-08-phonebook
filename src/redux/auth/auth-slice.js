@@ -44,11 +44,14 @@ const authSlice = createSlice({
       state.isFetchingCurrentUser = false;
     },
     //*---------- LOGOUT-------//
-    [authOperations.logOut.fulfilled](state) {
-      state.user = { name: null, email: null };
-      state.token = null;
-      state.isLoggedIn = false;
-      state.error = null;
+    // [authOperations.logOut.fulfilled](state) {
+    //   state.user = { name: null, email: null };
+    //   state.token = null;
+    //   state.isLoggedIn = false;
+    //   state.error = null;
+    // },
+    [authOperations.logOut.fulfilled]: () => {
+      return initialState;
     },
 
     //*---------- REFRESH-------//

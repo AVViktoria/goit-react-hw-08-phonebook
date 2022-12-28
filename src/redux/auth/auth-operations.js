@@ -52,6 +52,7 @@ const logOut = createAsyncThunk(
     try {
       await axios.post('/users/logout');
       token.unset();
+      console.log('----data logout')
     } catch (error) {
       console.log('----data logout error')
       return rejectWithValue(error.message);
@@ -75,7 +76,7 @@ const fetchCurrentUser = createAsyncThunk(
     token.set(persistedToken);
     try {
       const { data } = await axios.get('/users/current');
-      console.log('get user');
+      // console.log('get user');
       return data;
     } catch (error) {
       return error.message;

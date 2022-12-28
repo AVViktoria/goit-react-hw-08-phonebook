@@ -16,7 +16,7 @@ const styles = {
   },
 };
 
-export default function Navigation(){
+export default function Navigation() {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
   return (
     <nav>
@@ -26,29 +26,17 @@ export default function Navigation(){
 
       {isLoggedIn && (
         <>
-          <NavLink
-            to="/contacts"
-           
-            style={styles.link}
-            
-          >
+          <NavLink to="/contacts" style={styles.link}>
             Phonebook
           </NavLink>
-          <NavLink
-            to="/upload"
-           
-            style={styles.link}
-          
-          >
+          <NavLink to="/upload" style={styles.link}>
             Loading
           </NavLink>
         </>
       )}
     </nav>
   );
-};
-
-
+}
 
 // import { useState } from 'react';
 // import { NavLink } from 'react-router-dom';
